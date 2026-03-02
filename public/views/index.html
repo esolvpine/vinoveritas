@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cellier</title>
+    <!-- Bootstrap CSS -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/list.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <!-- Create a new CSS file (styles.css) for custom styles -->
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
+    </div>
+    <div id="splash" onclick="$('#splash').hide();$('#main').show();"></div>
+    <div id="main" style="display: none">
+      <div id="container" class="container">
+        <input id="searchWine" type="text" placeholder="Nom" />
+        <button
+          id="button1"
+          onclick="document.getElementById('searchWine').value = '';generateList('name','')"
+        >
+          Effacer
+        </button>
+      </div>
+      <div id="messageCenter">Tous les vins enregistrés</div>
+      <!-- Main Content -->
+      <div id="filter">
+        <div id="qtyFilter" onclick="sort('qty')">Qtée</div>
+        <div id="nameFilter" onclick="sortName()">Nom</div>
+        <div id="MillesimeFilter" onclick="sort('vintage')">Année</div>
+        <div id="starsFilter" onclick="sort('notation')">Note</div>
+      </div>
+      <div id="list-container" class="listcontainer"></div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/stars.js"></script>    
+    <script src="js/wineAPI.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/list.js"></script>
+    <script src="js/tools.js"></script>
+    <script>
+       $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('splash') === 'hide') {
+          $('#splash').hide();
+          $('#main').show();
+        }
+      }); 
+    </script>
+  </body>
+</html>

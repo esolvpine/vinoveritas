@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#splash {
+  background-image: url("../img/cellar.jpg");
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.form-label {
+  padding-left: 10px;
+}
+
+.img-style {
+  visibility: hidden;
+  position: absolute;
+}
+
+.img-btn {
+  border: 1px solid;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: green;
+  color: #fff;
+  text-align: center;
+}
+.img-empty {
+  margin: auto;
+}
+
+.label {
+  width: 100%;
+  height: auto;
+}
+.img-container {
+  padding: 10px;
+}
+.lists-top-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.lists-column-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.medium-input-container {
+  width: calc(50% - 6px);
+  float: left;
+  padding: 10px;
+  margin: 3px;
+  border: 1px solid #ccc;
+}
+
+.comment-area {
+  height: 70px !important;
+}
+
+.button-container {
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.wine-button {
+  margin: 5px !important;
+}
+
+.wine-info-img {
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  width: 100%;
+  height: 200px;
+}
+
+.wine-info {
+  position: absolute;
+  height: 200px;
+  background: rgb(250, 250, 250);
+  width: 60%;
+  right: 0;
+}
+
+.qr {
+  text-align: center;
+}
+
+.qr-img {
+  width: 90%;
+  margin-top: 25%;
+}
+
+#messageCenter {
+  text-align: center;
+  width: 100vw;
+}
+
+#filter div {
+  display: inline-block;
+  font-size: 0.8em;
+  padding: 0 10px;
+}
+
+#nameFilter {
+  width: 87px;
+}

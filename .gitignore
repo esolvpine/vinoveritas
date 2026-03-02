@@ -1,0 +1,15 @@
+# Environment variables (contains secrets)
+.env
+
+# Dependencies
+node_modules/
+
+# SSL certificates and keys
+certs/
+
+# Claude Code session data
+.claude/
+
+# OS metadata
+.DS_Store
+Thumbs.db

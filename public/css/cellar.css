@@ -1,0 +1,289 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.main_container {
+  width: 100vw;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh-30px);
+}
+
+.section_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cellar_container {
+  width: 100vw;
+  display: flex;
+  padding: 0;
+  border: 5px solid rgb(188, 124, 20);
+  margin-bottom: 20px;
+}
+
+.c_column {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 85px;
+}
+
+.c_center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60px;
+  height: inherit;
+  border-left: 5px solid rgb(188, 124, 20);
+  border-right: 5px solid rgb(188, 124, 20);
+}
+
+.c_winerack {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #000;
+  cursor: pointer;
+  height: 35px;
+  margin-bottom: 3px;
+}
+
+.c_shelves {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  padding-top: 20px;
+  height: 100px;
+}
+
+.c_shelve_border {
+  border-top: 5px solid rgb(188, 124, 20);
+}
+
+.bottle {
+  position: absolute;
+  bottom: -4px;
+  left: 5px;
+  width: 18vw;
+  clip-path: polygon(
+    9% 11%,
+    68% 12%,
+    74% 23%,
+    79% 38%,
+    95% 39%,
+    95% 59%,
+    79% 59%,
+    74% 69%,
+    68% 77%,
+    9% 77%
+  );
+  height: 25px;
+  opacity: 0.3;
+}
+
+.bottle_rotate {
+  transform: rotate(270deg);
+  bottom: 10px;
+  left: -8px;
+}
+
+.circleBottle {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+.empty-bottle {
+  background-color: rgb(198, 195, 195);
+}
+
+.red-bottle {
+  background-color: rgb(60, 19, 1);
+  opacity: 1;
+}
+.green-bottle {
+  background-color: rgb(14, 206, 219);
+  opacity: 1;
+}
+.white-bottle {
+  background-color: rgb(159 177 48);
+  opacity: 1;
+}
+
+.bubbly-bottle {
+  background-color: rgb(12, 167, 214);
+  opacity: 1;
+}
+
+.kitchen_cellar_container {
+  width: 184px;
+  height: 250px;
+  justify-content: center;
+  display: flex;
+  background-color: darkgray;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.fridge_cellar_container {
+  width: 184px;
+  height: 50px;
+  justify-content: center;
+  display: flex;
+
+  background-color: rgb(40, 130, 186);
+  flex-wrap: wrap;
+}
+
+.octagon {
+  display: flex;
+  width: 45px;
+  height: 45px;
+  background: transparent;
+  position: relative;
+  text-align: center;
+}
+
+.octagon:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom: 9px solid #fff;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  width: 43px;
+  height: 0;
+}
+
+.octagon:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 9px solid #fff;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  width: 43px;
+  height: 0;
+}
+
+/* For demo purposes */
+.octagon > div {
+  height: 27px;
+  width: 45px;
+  margin: 9px 0 0 0;
+  display: flex;
+  align-items: center;
+  line-height: 32px;
+  background: #fff;
+  justify-content: center;
+}
+
+/* .circleRed {
+  position: absolute;
+  background-color: rgb(60, 19, 1);
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+}
+.circleWhite {
+  position: absolute;
+  background-color: rgb(230, 241, 205);
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+}
+.circleEmpty {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+}
+.circleMousseux {
+  position: absolute;
+  background-color: rgb(12, 167, 214);
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+} */
+#footerContainer {
+  position: fixed;
+  bottom: 0;
+  height: 80px;
+  background: rgba(246, 244, 244, 1);
+  width: 100vw;
+  display: none;
+  justify-content: end;
+  align-items: center;
+  z-index: 2;
+  border-top: 1px solid #000;
+}
+
+.footerButtonAdd {
+  background-color: rgb(218, 220, 223);
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 10px;
+  color: blue;
+}
+
+.footerButtonReset {
+  background-color: rgb(218, 223, 223);
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 20px;
+  color: red;
+}
+
+#addTrigger {
+  margin: 0 auto;
+  text-align: center;
+  padding: 5px 0;
+  background: aliceblue;
+  position: fixed;
+  width: 100vw;
+  z-index: 99;
+  top: 0;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+section_title {
+}

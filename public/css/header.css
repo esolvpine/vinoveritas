@@ -1,0 +1,42 @@
+.menu-list {
+  display: none;
+  position: absolute; /* Change to absolute positioning */
+  top: 100%; /* Position the list below the hamburger menu */
+  left: 0; /* Align the list with the left edge of the container */
+  background-color: #f9f9f9; /* Add background color for visibility */
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 100;
+  width: 90vw;
+}
+.menu-list.active {
+  display: block;
+}
+
+.menu-item-container {
+  display: flex;
+}
+.inner-menu-div {
+  flex: 1;
+  padding: 10px;
+  margin: 5px;
+  background-color: lightblue;
+  text-align: center;
+  cursor: pointer;
+}
+.active-menu {
+  display: none;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-size: 1.5em;
+  padding: 10px 0 10px 10px;
+}
+
+.hamburger-menu {
+  cursor: pointer;
+}
+
