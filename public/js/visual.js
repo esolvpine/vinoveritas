@@ -179,9 +179,9 @@ function buildSlide(wine) {
   // Wine image container
   const imageContainer = $('<div class="wine-image"></div>');
 
-  // Add image or placeholder based on wine.img
-  if (wine.img) {
-    const img = $('<img>').attr('src', wine.img).attr('alt', wine.name);
+  // Add image or placeholder based on wine.image
+  if (wine.image) {
+    const img = $('<img>').attr('src', wine.image).attr('alt', wine.name);
     img.on('error', function () {
       handleImageError($(this), wine.type);
     });

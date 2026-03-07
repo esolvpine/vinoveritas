@@ -262,6 +262,9 @@ body {
   background: linear-gradient(to top, rgba(26, 20, 20, 0.95), rgba(26, 20, 20, 0.8) 50%, transparent);
   padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md);
   padding-top: var(--spacing-2xl);
+  padding-left: calc(var(--spacing-md) + var(--safe-left));
+  padding-right: calc(var(--spacing-md) + var(--safe-right));
+  padding-bottom: calc(var(--spacing-md) + var(--safe-bottom));
   min-height: 140px;
   z-index: 10;
 }
