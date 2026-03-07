@@ -101,10 +101,7 @@ if (lastPartWithoutParams === "activities") {
   $(".hamburger-menu").append($menuItems);
 } else if (lastPartWithoutParams === "visual") {
   menuItems = [
-    {
-      text: "Acceuil",
-      onclick: "fetchCurrentAll('');messageCenter.html('Tous les vins enregistrés');filterByName('');",
-    },
+    { text: "Acceuil", onclick: "window.location.href='/';" },
     { text: "Cellier", onclick: "window.location.href='/cellar';" },
     { text: "Ajouter un vin", onclick: "window.location.href='/details';" },
     { text: "Activités", onclick: "window.location.href='/activities';" },
