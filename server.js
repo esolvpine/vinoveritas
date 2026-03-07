@@ -26,6 +26,7 @@ app.get('/', (_, res) => res.sendFile(path.join(viewsPath, 'index.html')));
 app.get('/details', (_, res) => res.sendFile(path.join(viewsPath, 'details.html')));
 app.get('/cellar', (_, res) => res.sendFile(path.join(viewsPath, 'cellar.html')));
 app.get('/activities', (_, res) => res.sendFile(path.join(viewsPath, 'activities.html')));
+app.get('/visual', (_, res) => res.sendFile(path.join(viewsPath, 'visual.html')));
 
 const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`Listening on port ${port}`));
