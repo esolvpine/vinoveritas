@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activities</title>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cellar</title>
+        <link rel="stylesheet" href="../css/cellar.css" />
+        <link rel="stylesheet" href="../css/modal.css" />
+        <link rel="stylesheet" href="../css/list.css" />
+        <link rel="stylesheet" href="../css/header.css" />
+        <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+        <link rel="manifest" href="../site.webmanifest" />
+        <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
+      <body>
+        <div class="menu-container">
+          <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
+        </div>
+        <!-- Main container div -->
+        <div class="modal" id="wineModal" windid="">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="column column-1"></div>
+            <div class="column column-2">
+              <div class="container">
+                <div class="child modal-label">Nom</div>
+                <div id="winename" class="child modal-text"></div>
+                <div class="container">
+                  <div class="column" style="width: 30%; float: left; padding: 0">
+                    <div class="child modal-label">Qtée</div>
+                    <div id="wineqty" class="child modal-text">4</div>
+                  </div>
+                  <div class="column" style="width: 30%; float: left">
+                    <div class="child modal-label">Prix</div>
+                    <div id="wineprice" class="child modal-text">6</div>
+                  </div>
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="button" onclick="takeWine(this)">Prendre</div>
+                <div
+                  class="button"
+                  style="background: #a30b0b"
+                  onclick="wineModal.hide();"
+                >
+                  Fermer
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../js/wineAPI.js"></script>
+        <script src="../js/cellar.js"></script>
+        <script src="../js/modal.js"></script>
+        <script src="../js/list.js"></script>
+        <script src="../js/stars.js"></script>
+        <script src="../js/locations.js"></script>
+        <script src="../js/menu.js"></script>
+        <script src="../js/tools.js"></script>
+      </body>
+    </html>    <link rel="stylesheet" href="/css/details.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
+    <link rel="stylesheet" href="/css/activities.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
+      <div class="header-title">Vino Veritas</div>
+    </div>
+
+    <div id="main" class="main-div"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/wineAPI.js"></script>
+    <script src="/js/details.js"></script>
+    <script src="/js/menu.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/list.js"></script>
+    <script>
+      $(document).ready(function () {
+        fetchActivities().then((activities) => {
+          const mainDiv = $('#main');
+          activities.data.forEach((activity) => {
+            const color = activity.action === 'added' ? 'green' : 'red';
+            const activityDiv = `
+              <div class="activity-item" style="color: ${color}">
+                <h3>${activity.date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${activity.action}&nbsp;&nbsp;${activity.qty}</h3>
+                <p>${activity.name}</p>
+              </div>`;
+            mainDiv.append(activityDiv);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

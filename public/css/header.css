@@ -1,0 +1,328 @@
+/* ============================================
+   HEADER & MENU - Modern Mobile Design
+   ============================================ */
+
+/* Menu Container - Fixed to top with safe area */
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--safe-top) + var(--spacing-md)) var(--spacing-md) var(--spacing-md);
+  background: var(--color-bg-surface);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+  z-index: 50;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+
+  /* Slide down animation on load */
+  animation: headerSlideDown 0.5s ease-out;
+}
+
+@keyframes headerSlideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Hamburger Menu Icon */
+.hamburger-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; /* Touch-friendly */
+  height: 48px;
+  font-size: 1.75rem;
+  color: var(--color-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  position: relative;
+
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Subtle background on dark */
+  background: rgba(201, 169, 97, 0.05);
+}
+
+.hamburger-menu:active {
+  transform: scale(0.92);
+  background: rgba(201, 169, 97, 0.15);
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+/* App title centered in viewport - Vino Veritas branding */
+.header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  letter-spacing: 0.08em;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(201, 169, 97, 0.3);
+
+  /* Prevent text from wrapping */
+  white-space: nowrap;
+
+  /* Subtle animation on load */
+  animation: titleFadeIn 0.8s ease-out;
+}
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Dropdown Menu List */
+.menu-list {
+  position: fixed;
+  top: calc(var(--safe-top) + 80px); /* Below header - matches header height */
+  left: 0;
+  right: 0;
+  background: var(--color-bg-surface);
+  backdrop-filter: blur(16px);
+  padding: var(--spacing-md);
+  border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 49;
+
+  /* Hidden by default */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height var(--transition-normal),
+              opacity var(--transition-normal),
+              transform var(--transition-normal);
+}
+
+/* Active state with slide-down animation */
+.menu-list.active {
+  max-height: 600px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes menuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Menu backdrop (dim background) */
+.menu-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 48;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.menu-backdrop.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Menu Item Container */
+.menu-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Individual Menu Items */
+.inner-menu-div {
+  flex: 1;
+  min-height: 56px; /* Touch-friendly */
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-surface));
+  border: 1px solid rgba(201, 169, 97, 0.15);
+  border-radius: var(--radius-md);
+  text-align: center;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Staggered reveal */
+  opacity: 0;
+  animation: menuItemFadeIn 0.3s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.inner-menu-div:nth-child(1) { animation-delay: 0.05s; }
+.inner-menu-div:nth-child(2) { animation-delay: 0.1s; }
+.inner-menu-div:nth-child(3) { animation-delay: 0.15s; }
+.inner-menu-div:nth-child(4) { animation-delay: 0.2s; }
+.inner-menu-div:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes menuItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Menu item active state */
+.inner-menu-div:active {
+  transform: scale(0.97);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 16px var(--color-accent-glow);
+}
+
+/* Active menu indicator (for current page) */
+.inner-menu-div.active-menu-item {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+/* Menu divider */
+.menu-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(201, 169, 97, 0.3),
+    transparent
+  );
+  margin: var(--spacing-sm) 0;
+}
+
+/* Menu section title */
+.menu-section-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+/* Hide menu class (legacy support) */
+.active-menu {
+  display: none;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* Small phones */
+@media (max-width: 375px) {
+  .hamburger-menu {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+
+  .header-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+  }
+
+  .inner-menu-div {
+    font-size: 0.9rem;
+    min-height: 52px;
+  }
+}
+
+/* Very small phones - hide title if needed */
+@media (max-width: 320px) {
+  .header-title {
+    font-size: 1rem;
+  }
+}
+
+/* Larger phones and tablets */
+@media (min-width: 768px) {
+  .menu-list {
+    left: 0;
+    right: auto;
+    width: 320px;
+    border-right: 1px solid rgba(201, 169, 97, 0.2);
+    border-bottom: none;
+  }
+
+  .menu-item-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .menu-divider {
+    grid-column: 1 / -1;
+  }
+
+  .menu-section-title {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Landscape mode on phones */
+@media (orientation: landscape) and (max-height: 500px) {
+  .menu-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .menu-list.active,
+  .inner-menu-div {
+    animation: none;
+  }
+
+  .hamburger-menu:active,
+  .inner-menu-div:active {
+    transition: none;
+  }
+}

@@ -1,0 +1,570 @@
+/* ============================================
+   WINE LIST VIEW - Modern Mobile Design
+   ============================================ */
+
+/* Main List Container - Minimal horizontal padding */
+.list-container,
+.listcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-md);
+  padding: 0 4px;
+}
+
+.list-container-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  max-height: 70vh;
+  overflow-y: auto;
+
+  /* Custom scrollbar for webkit browsers */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-secondary) var(--color-bg-surface);
+}
+
+.list-container-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list-container-modal::-webkit-scrollbar-track {
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-full);
+}
+
+.list-container-modal::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: var(--radius-full);
+}
+
+/* Inner Container - Modern Layout (without score in flex) */
+.list-inner-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.list-inner-container-modal {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+/* Quantity Badge - Left Side with Wine Type Colors */
+.wine-qty-badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 48px;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Red Wine - Brighter burgundy for better contrast */
+.wine-qty-badge.wine-type-red {
+  background: linear-gradient(135deg, #C41E3A, #8B0000);
+  border-color: #C41E3A;
+}
+
+/* White Wine - Brighter golden/amber tones */
+.wine-qty-badge.wine-type-white {
+  background: linear-gradient(135deg, #F5E6D3, #E6C17A);
+  border-color: #E6C17A;
+  color: #1A1414;
+}
+
+/* Rosé Wine - Brighter pink/coral */
+.wine-qty-badge.wine-type-rose {
+  background: linear-gradient(135deg, #FF69B4, #DB7093);
+  border-color: #FF69B4;
+}
+
+/* Sparkling Wine - Brighter champagne gold with shimmer */
+.wine-qty-badge.wine-type-sparkling {
+  background: linear-gradient(135deg, #F4D03F, #C9A961);
+  border-color: #F4D03F;
+  color: #1A1414;
+  box-shadow: 0 2px 8px rgba(244, 208, 63, 0.4);
+}
+
+/* Dessert Wine - Rich amber */
+.wine-qty-badge.wine-type-dessert {
+  background: linear-gradient(135deg, #CD853F, #8B5A00);
+  border-color: #DAA520;
+}
+
+/* Default fallback */
+.wine-qty-badge.wine-type-default {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-color: var(--color-secondary);
+}
+
+/* Wine Info Content - Center (with space for score) */
+.wine-info-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  overflow: hidden;
+  padding-right: var(--spacing-xs);
+}
+
+/* Wine Name - Sans-serif for readability */
+.wine-name-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Wine Meta Info (vintage + type) */
+.wine-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+
+/* Score Badge - Upper Right Corner (Minimal) */
+.wine-score-badge {
+  position: absolute;
+  top: var(--spacing-xs);
+  right: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-secondary);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.wine-score-badge.wine-score-empty {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+/* Wine List Item Card - Minimal padding */
+.list-item-container,
+.list-item-container-modal {
+  position: relative;
+  padding: var(--spacing-sm) var(--spacing-sm);
+  margin: 0;
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(201, 169, 97, 0.15);
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+
+  /* Card elevation */
+  box-shadow: var(--shadow-sm);
+
+  /* Touch feedback */
+  -webkit-tap-highlight-color: transparent;
+
+  /* Subtle bottle watermark */
+  background-image:
+    linear-gradient(135deg, transparent 0%, rgba(107, 28, 35, 0.03) 100%);
+
+  /* Minimum touch target */
+  min-height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Hover/Active states for cards */
+.list-item-container:active,
+.list-item-container-modal:active {
+  transform: scale(0.98);
+  border-color: var(--color-secondary);
+  box-shadow:
+    var(--shadow-md),
+    0 0 0 2px var(--color-accent-glow);
+  background: var(--color-bg-elevated);
+}
+
+/* Wine name styling */
+.list-item-container .wine-name,
+.list-item-container-modal .wine-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.01em;
+}
+
+/* Wine details (year, type, etc.) */
+.list-item-container .wine-details,
+.list-item-container-modal .wine-details {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* Select Wine Button/Area */
+.select-wine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  min-height: 44px; /* Touch-friendly */
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.select-wine:active {
+  transform: scale(0.96);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Stars Container (ratings) */
+.stars-container {
+  position: absolute;
+  right: var(--spacing-md);
+  top: var(--spacing-md);
+  display: flex;
+  gap: 2px;
+  z-index: 1;
+}
+
+/* Individual star */
+.star {
+  width: 16px;
+  height: 16px;
+  color: var(--color-secondary);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  transition: transform var(--transition-fast);
+}
+
+.star.filled {
+  color: var(--color-secondary);
+  filter: drop-shadow(0 1px 3px rgba(201, 169, 97, 0.5));
+}
+
+.star.empty {
+  color: var(--color-text-muted);
+  opacity: 0.3;
+}
+
+/* Star hover effect (for interactive ratings) */
+.star:active {
+  transform: scale(1.2);
+}
+
+/* Search Container (in main and modal) */
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+/* Text Input Styling */
+input[type="text"] {
+  flex: 1;
+  min-height: 48px;
+  padding: var(--spacing-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  background: var(--color-bg-dark);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all var(--transition-normal);
+}
+
+input[type="text"]::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+input[type="text"]:focus {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+  background: var(--color-bg-surface);
+}
+
+/* Button Styling */
+button {
+  min-height: 48px;
+  min-width: 88px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-sm);
+
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Wine Type Indicators (colored dots/badges) */
+.wine-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wine-type-badge.red {
+  background: rgba(139, 0, 0, 0.2);
+  color: #FF6B6B;
+  border: 1px solid rgba(139, 0, 0, 0.3);
+}
+
+.wine-type-badge.white {
+  background: rgba(212, 165, 116, 0.2);
+  color: #F4E4C1;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+}
+
+.wine-type-badge.rose {
+  background: rgba(255, 182, 193, 0.2);
+  color: #FFB6C1;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.wine-type-badge.sparkling {
+  background: rgba(201, 169, 97, 0.2);
+  color: var(--color-secondary);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+/* Empty State */
+.list-empty {
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+/* Loading State */
+.list-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-2xl);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(201, 169, 97, 0.2);
+  border-top-color: var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Staggered entry animation for list items */
+.list-item-container {
+  animation: listItemSlideIn 0.3s ease-out backwards;
+}
+
+.list-item-container:nth-child(1) { animation-delay: 0.05s; }
+.list-item-container:nth-child(2) { animation-delay: 0.1s; }
+.list-item-container:nth-child(3) { animation-delay: 0.15s; }
+.list-item-container:nth-child(4) { animation-delay: 0.2s; }
+.list-item-container:nth-child(5) { animation-delay: 0.25s; }
+.list-item-container:nth-child(n+6) { animation-delay: 0.3s; }
+
+@keyframes listItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Quantity badge */
+.qty-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 var(--spacing-sm);
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Vintage year styling - Larger and prominent */
+.vintage-year {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+.vintage-year::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+
+/* Price display */
+.wine-price {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+}
+
+.wine-price::before {
+  content: '$';
+  margin-right: 2px;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* Small phones */
+@media (max-width: 375px) {
+  .list-item-container,
+  .list-item-container-modal {
+    padding: 6px;
+    font-size: 0.85rem;
+  }
+
+  .list-inner-container,
+  .list-inner-container-modal {
+    gap: 6px;
+  }
+
+  .wine-qty-badge {
+    min-width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+
+  .wine-name-text {
+    font-size: 0.95rem;
+  }
+
+  .wine-score-badge {
+    font-size: 1rem;
+    top: 4px;
+    right: 6px;
+  }
+
+  .vintage-year {
+    font-size: 1rem;
+  }
+
+  .vintage-year::before {
+    width: 4px;
+    height: 4px;
+    margin-right: 6px;
+  }
+
+  .list-item-container .wine-name,
+  .list-item-container-modal .wine-name {
+    font-size: 0.95rem;
+  }
+
+  .stars-container {
+    right: var(--spacing-sm);
+    top: var(--spacing-sm);
+  }
+
+  .star {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Larger phones and tablets */
+@media (min-width: 768px) {
+  .list-container,
+  .listcontainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .list-item-container {
+    animation: none;
+  }
+
+  .loading-spinner {
+    animation-duration: 2s;
+  }
+}

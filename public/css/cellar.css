@@ -1,0 +1,415 @@
+/* Import design system variables */
+:root {
+  --color-primary: #6B1C23;
+  --color-primary-light: #8B2C33;
+  --color-primary-dark: #4A1318;
+  --color-secondary: #C9A961;
+  --color-accent: #D4A574;
+  --color-accent-glow: rgba(201, 169, 97, 0.3);
+  --color-bg-dark: #1A1414;
+  --color-bg-surface: #2A1F24;
+  --color-bg-elevated: #3A2F34;
+  --color-text-primary: #F5F1E8;
+  --color-text-secondary: #C9C0B8;
+  --color-text-muted: #8B837D;
+  --font-display: 'Noto Sans', Verdana, 'Trebuchet MS', 'Lucida Grande', sans-serif;
+  --font-body: 'Noto Sans', Verdana, 'Trebuchet MS', 'Lucida Grande', sans-serif;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --transition-normal: 250ms ease-out;
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
+  --safe-right: env(safe-area-inset-right);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+.main_container {
+  width: 100vw;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 30px);
+  padding-top: calc(var(--safe-top) + 60px); /* Just under the hamburger menu */
+  padding-bottom: calc(var(--safe-bottom) + var(--spacing-lg));
+}
+
+.section_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cellar_container {
+  width: 100vw;
+  display: flex;
+  padding: 0;
+  border: 5px solid var(--color-secondary);
+  margin-bottom: 20px;
+  background: rgba(201, 169, 97, 0.05);
+  box-shadow: var(--shadow-md);
+}
+
+.c_column {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 85px;
+}
+
+.c_center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60px;
+  height: inherit;
+  border-left: 5px solid var(--color-secondary);
+  border-right: 5px solid var(--color-secondary);
+}
+
+.c_winerack {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+  cursor: pointer;
+  height: 35px;
+  margin-bottom: 3px;
+  transition: background var(--transition-normal);
+}
+
+.c_winerack:hover {
+  background: rgba(201, 169, 97, 0.1);
+}
+
+.c_shelves {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  padding-top: 20px;
+  height: 100px;
+  transition: background var(--transition-normal);
+}
+
+.c_shelves:hover {
+  background: rgba(201, 169, 97, 0.1);
+}
+
+.c_shelve_border {
+  border-top: 5px solid var(--color-secondary);
+}
+
+.bottle {
+  position: absolute;
+  bottom: 2px;
+  left: 5px;
+  width: 18vw;
+  clip-path: polygon(
+    9% 11%,
+    68% 12%,
+    74% 23%,
+    79% 38%,
+    95% 39%,
+    95% 59%,
+    79% 59%,
+    74% 69%,
+    68% 77%,
+    9% 77%
+  );
+  height: 25px;
+  opacity: 0.3;
+}
+
+.bottle_rotate {
+  transform: rotate(270deg);
+  bottom: 16px;
+  left: -8px;
+}
+
+.circleBottle {
+  position: absolute;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+}
+
+/* Empty Bottle - Circle placeholder for octagons */
+.circleBottle.empty-bottle {
+  background: rgba(139, 131, 125, 0.2);
+  opacity: 0.3;
+  border: 1px solid rgba(139, 131, 125, 0.3);
+}
+
+/* Empty Bottle - Polygon for wine racks */
+.bottle.empty-bottle {
+  background: rgba(139, 131, 125, 0.2);
+  opacity: 0.3;
+  border: 1px solid rgba(139, 131, 125, 0.3);
+}
+
+/* Red Wine Bottle - Brighter burgundy for better contrast */
+.red-bottle,
+.circleBottle.red-bottle {
+  background: linear-gradient(135deg, #C41E3A, #8B0000);
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(196, 30, 58, 0.5);
+}
+
+/* White Wine Bottle - Brighter golden/champagne gradient */
+.white-bottle,
+.circleBottle.white-bottle {
+  background: linear-gradient(135deg, #F5E6D3, #E6C17A);
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(230, 193, 122, 0.5);
+}
+
+/* Rosé Wine Bottle - Brighter pink/coral gradient */
+.rose-bottle,
+.circleBottle.rose-bottle {
+  background: linear-gradient(135deg, #FF69B4, #DB7093);
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(255, 105, 180, 0.5);
+}
+
+/* Sparkling Wine Bottle - Brighter champagne gold with shimmer */
+.bubbly-bottle,
+.circleBottle.bubbly-bottle {
+  background: linear-gradient(135deg, #F4D03F, #C9A961);
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(244, 208, 63, 0.6);
+}
+
+/* Selected/Highlighted Bottle - Electric Cyan with Strong Pulse */
+.green-bottle,
+.circleBottle.green-bottle {
+  background: linear-gradient(135deg, #00FFFF, #00CED1);
+  opacity: 1;
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 1),
+    0 0 40px rgba(0, 255, 255, 0.6),
+    inset 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: bottlePulseStrong 0.8s ease-in-out infinite;
+  border: 2px solid #FFFFFF;
+}
+
+@keyframes bottlePulseStrong {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 1);
+  }
+}
+
+.kitchen_cellar_container {
+  width: 210px;
+  height: 250px;
+  justify-content: center;
+  display: flex;
+  background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-surface));
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+  padding: 10px;
+  gap: 3px;
+  box-sizing: content-box;
+}
+
+.fridge_cellar_container {
+  width: 210px;
+  height: 60px;
+  justify-content: center;
+  display: flex;
+  background: linear-gradient(135deg, #4A7C9C, #2B5F7E);
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-md);
+  padding: 10px;
+  gap: 3px;
+  box-sizing: content-box;
+}
+
+.octagon {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  background: transparent;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.octagon:hover {
+  transform: scale(1.05);
+}
+
+.octagon:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom: 9px solid rgba(245, 241, 232, 0.2);
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  width: 44px;
+  height: 0;
+}
+
+.octagon:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 9px solid rgba(245, 241, 232, 0.2);
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  width: 44px;
+  height: 0;
+}
+
+.octagon > div {
+  height: 28px;
+  width: 46px;
+  margin: 9px 0 0 0;
+  display: flex;
+  align-items: center;
+  line-height: 32px;
+  background: rgba(245, 241, 232, 0.2);
+  justify-content: center;
+}
+
+/* .circleRed {
+  position: absolute;
+  background-color: rgb(60, 19, 1);
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+}
+.circleWhite {
+  position: absolute;
+  background-color: rgb(230, 241, 205);
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+}
+.circleEmpty {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+}
+.circleMousseux {
+  position: absolute;
+  background-color: rgb(12, 167, 214);
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  z-index: 1;
+} */
+#footerContainer {
+  position: fixed;
+  bottom: 0;
+  height: 80px;
+  background: rgba(246, 244, 244, 1);
+  width: 100vw;
+  display: none;
+  justify-content: end;
+  align-items: center;
+  z-index: 2;
+  border-top: 1px solid #000;
+}
+
+.footerButtonAdd {
+  background-color: rgb(218, 220, 223);
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 10px;
+  color: blue;
+}
+
+.footerButtonReset {
+  background-color: rgb(218, 223, 223);
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 20px;
+  color: red;
+}
+
+#addTrigger {
+  margin: 0 auto;
+  text-align: center;
+  padding: 5px 0;
+  background: var(--color-primary);
+  position: fixed;
+  width: 100vw;
+  z-index: 99;
+  top: calc(var(--safe-top) + 60px); /* Just under hamburger menu */
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-md);
+}
+
+.section_title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-align: center;
+  padding: var(--spacing-md);
+  margin-top: 10px; /* Space from hamburger menu */
+  letter-spacing: 0.05em;
+}

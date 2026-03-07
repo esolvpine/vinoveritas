@@ -1,0 +1,203 @@
+/* Import design system variables */
+:root {
+  --color-primary: #6B1C23;
+  --color-primary-light: #8B2C33;
+  --color-primary-dark: #4A1318;
+  --color-secondary: #C9A961;
+  --color-accent: #D4A574;
+  --color-accent-glow: rgba(201, 169, 97, 0.3);
+  --color-bg-dark: #1A1414;
+  --color-bg-surface: #2A1F24;
+  --color-bg-elevated: #3A2F34;
+  --color-text-primary: #F5F1E8;
+  --color-text-secondary: #C9C0B8;
+  --color-text-muted: #8B837D;
+  --font-display: 'Noto Sans', Verdana, 'Trebuchet MS', 'Lucida Grande', sans-serif;
+  --font-body: 'Noto Sans', Verdana, 'Trebuchet MS', 'Lucida Grande', sans-serif;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --transition-normal: 250ms ease-out;
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
+  --safe-right: env(safe-area-inset-right);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.form-label {
+  padding-left: 10px;
+}
+.main-div {
+  margin: 0 auto;
+  padding: calc(var(--safe-top) + 80px) var(--spacing-md) calc(var(--safe-bottom) + var(--spacing-md));
+  overflow: hidden; /* Clears floats */
+  max-width: 800px;
+}
+.child-div {
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(201, 169, 97, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.child-div.inline-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: var(--spacing-sm);
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  background: var(--color-bg-dark);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+  outline: none;
+  transition: all var(--transition-normal);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+  background: var(--color-bg-surface);
+}
+.half-width {
+  width: 50%;
+  float: left;
+  box-sizing: border-box;
+}
+.inline-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  align-items: stretch;
+}
+.inline-buttons button {
+  flex: 1;
+  min-height: 48px;
+  padding: var(--spacing-md) var(--spacing-sm);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-text-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  letter-spacing: 0.02em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.inline-buttons button:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.inline-buttons button#removeWine {
+  background: linear-gradient(135deg, #a30b0b, #7a0808);
+}
+
+@media screen and (max-width: 600px) {
+  .inline-buttons button {
+    font-size: 0.9rem;
+    padding: var(--spacing-md) var(--spacing-xs);
+  }
+}
+
+.image-container {
+  padding: var(--spacing-md);
+}
+
+.label-img {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+#wine-image-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+#wine-image-container .modification button {
+  flex: 1;
+  min-width: 48px;
+  max-width: 80px;
+  min-height: 48px;
+  padding: var(--spacing-sm) var(--spacing-xs);
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-text-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#wine-image-container .modification button:active {
+  transform: scale(0.96);
+}
+
+.addition {
+  display: none;
+}
+
+.modification {
+  display: block;
+}

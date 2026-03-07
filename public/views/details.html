@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Détails - Vino Veritas</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/details.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
+      <div class="header-title">Vino Veritas</div>
+    </div>
+
+    <div id="main" class="main-div">
+      <div id="name" class="child-div">
+        <label for="inputField">Nom</label>
+        <input type="text" id="wineName" name="wineName">
+        <a id="saqLink" href="#" target="_blank" style="display:none">SAQ link</a>
+      </div>
+      <div id="grapeDropdown" class="child-div">
+        <label for="grapes">Raisin(s)</label>
+        <input type="text" id="grapes" name="grapes">
+        <label for="region">Région</label>
+        <input type="text" id="region" name="region">
+      </div>
+      <div id="country" class="child-div">
+        <label for="countries">Pays</label>
+        <input type="text" id="countries" name="countries">
+      </div>
+      <div id="child-div-4" class="child-div">
+        <div id="wine-image-container" class="half-width">
+          <img id="wineImage" class="label-img" src="" alt="Wine label">
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none" onchange="uploadCameraPhoto(this)">
+          <div class="modification" style="display:flex; gap:8px;">
+            <button onclick="showLocations()">🔍</button>
+            <button onclick="document.getElementById('cameraInput').click()">📷</button>
+          </div>
+        </div>
+        <div class="half-width">
+          <div>
+            <label for="winetypes">Type</label>
+            <input type="text" id="winetypes" name="winetypes">
+          </div>
+          <div>
+            <label for="vintages">Millésime</label>
+            <input type="text" id="vintages" name="vintages" inputmode="numeric">
+          </div>
+          <div>
+            <label for="inputField2">Coût</label>
+            <input type="text" id="wineCost" name="wineCost" inputmode="decimal">
+          </div>
+          <div>
+            <label for="inputField3">Notation</label>
+            <input type="text" id="wineRating" name="wineRating" inputmode="numeric">
+          </div>
+        </div>
+        <div style="clear: both"></div>
+      </div>
+      <div id="child-div-5" class="child-div">
+        <label for="textareaField">Commentaire</label>
+        <textarea id="wineComments" name="wineComments" rows="5"></textarea>
+      </div>
+      <div id="child-div-6" class="child-div inline-buttons modification">
+        <button id="removeWine" style="background-color: red" onclick="deleteConfirm()">
+          Éliminer
+        </button>
+        <button id="updateWine" class="modification" onclick="saveWine()">
+          Modifier
+        </button>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/wineAPI.js"></script>
+    <script src="/js/details.js"></script>
+    <script src="/js/menu.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/list.js"></script>
+  </body>
+</html>
