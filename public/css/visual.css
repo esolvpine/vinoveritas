@@ -1,0 +1,687 @@
+/* ============================================
+   VISUAL PAGE - Carousel Wine List Design
+   ============================================ */
+
+/* Design System CSS Variables - Wine Carousel */
+:root {
+  /* Colors */
+  --color-primary: #6B1C23;
+  --color-primary-light: #8B2C33;
+  --color-primary-dark: #4A1318;
+  --color-secondary: #C9A961;
+  --color-accent: #D4A574;
+  --color-accent-glow: rgba(201, 169, 97, 0.3);
+
+  --color-bg-dark: #1A1414;
+  --color-bg-surface: #2A1F24;
+  --color-bg-elevated: #3A2F34;
+
+  --color-text-primary: #F5F1E8;
+  --color-text-secondary: #C9C0B8;
+  --color-text-muted: #8B837D;
+
+  /* Wine Type Colors for Badges */
+  --color-red-wine: #8B2C33;
+  --color-white-wine: #D4A574;
+  --color-sparkling-wine: #E8C574;
+  --color-other-wine: #6B5B47;
+
+  /* Typography */
+  --font-display: 'Noto Sans', Verdana, 'Trebuchet MS', 'Lucida Grande', sans-serif;
+  --font-body: 'Noto Sans', Verdana, 'Trebuchet MS', 'Lucida Grande', sans-serif;
+  --font-accent: 'Cinzel Decorative', serif;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+
+  /* Safe Areas for Notches */
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
+  --safe-right: env(safe-area-inset-right);
+}
+
+/* Reset & Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  overflow: hidden; /* Full-screen experience */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+
+  /* Subtle texture overlay */
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(107, 28, 35, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(201, 169, 97, 0.08) 0%, transparent 50%);
+}
+
+/* ============================================
+   SORT CONTAINER - Fixed below header
+   ============================================ */
+
+.sort-container {
+  position: fixed;
+  top: calc(var(--safe-top) + 80px); /* Just below header */
+  left: 0;
+  right: 0;
+  padding: var(--spacing-md) var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+  z-index: 40;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+/* Sort Dropdown Styling */
+.sort-dropdown {
+  min-width: 140px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(201, 169, 97, 0.25);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  letter-spacing: 0.02em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A961' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-sm) center;
+  background-size: 20px;
+  padding-right: 36px;
+}
+
+.sort-dropdown:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  background-color: var(--color-bg-elevated);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.sort-dropdown:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   SWIPER CONTAINER - Main carousel area
+   ============================================ */
+
+.swiper {
+  position: fixed;
+  top: calc(var(--safe-top) + 80px + 50px); /* Below header and sort bar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(100vh - var(--safe-top) - 80px - 50px);
+  z-index: 30;
+}
+
+.swiper-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Swiper Slide Base Styles */
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--color-bg-dark);
+}
+
+/* ============================================
+   WINE IMAGE DISPLAY
+   ============================================ */
+
+.wine-image {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+  overflow: hidden;
+  position: relative;
+}
+
+.wine-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  animation: imageZoomIn 0.4s ease-out;
+}
+
+@keyframes imageZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   WINE PLACEHOLDERS BY TYPE
+   ============================================ */
+
+.wine-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  opacity: 0.4;
+  animation: placeholderFadeIn 0.3s ease-out;
+}
+
+@keyframes placeholderFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
+/* Gradient backgrounds for wine types */
+.wine-placeholder.type-red {
+  background: linear-gradient(135deg, rgba(139, 44, 51, 0.2), rgba(107, 28, 35, 0.15));
+}
+
+.wine-placeholder.type-white {
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), rgba(201, 169, 97, 0.15));
+}
+
+.wine-placeholder.type-sparkling {
+  background: linear-gradient(135deg, rgba(232, 197, 116, 0.2), rgba(212, 165, 116, 0.15));
+}
+
+.wine-placeholder.type-other {
+  background: linear-gradient(135deg, rgba(107, 91, 71, 0.2), rgba(75, 68, 59, 0.15));
+}
+
+/* ============================================
+   BOTTOM OVERLAY - Wine Information
+   ============================================ */
+
+.wine-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(26, 20, 20, 0.95), rgba(26, 20, 20, 0.8) 50%, transparent);
+  padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md);
+  padding-top: var(--spacing-2xl);
+  min-height: 140px;
+  z-index: 10;
+}
+
+/* Wine Name */
+.wine-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  animation: slideUp 0.4s ease-out 0.1s backwards;
+}
+
+/* Wine Metadata Container */
+.wine-meta-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  flex-wrap: wrap;
+  animation: slideUp 0.4s ease-out 0.15s backwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Wine Vintage */
+.wine-vintage {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* Wine Type Badge */
+.wine-type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius-full);
+  min-height: 24px;
+  min-width: 50px;
+  animation: slideUp 0.4s ease-out 0.2s backwards;
+}
+
+.wine-type-badge.red {
+  background: var(--color-red-wine);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+.wine-type-badge.white {
+  background: var(--color-white-wine);
+  color: var(--color-bg-dark);
+  border: 1px solid rgba(212, 165, 116, 0.5);
+}
+
+.wine-type-badge.sparkling {
+  background: var(--color-sparkling-wine);
+  color: var(--color-bg-dark);
+  border: 1px solid rgba(232, 197, 116, 0.5);
+}
+
+.wine-type-badge.other {
+  background: var(--color-other-wine);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+/* Bottom Info Container */
+.wine-bottom-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  animation: slideUp 0.4s ease-out 0.25s backwards;
+}
+
+/* Quantity Badge */
+.wine-qty-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-md);
+  min-height: 32px;
+  min-width: 60px;
+  transition: all var(--transition-normal);
+}
+
+.wine-qty-badge.red {
+  background: rgba(139, 44, 51, 0.8);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+.wine-qty-badge.white {
+  background: rgba(212, 165, 116, 0.8);
+  color: var(--color-bg-dark);
+  border: 1px solid rgba(232, 197, 116, 0.3);
+}
+
+.wine-qty-badge.sparkling {
+  background: rgba(232, 197, 116, 0.8);
+  color: var(--color-bg-dark);
+  border: 1px solid rgba(212, 165, 116, 0.3);
+}
+
+.wine-qty-badge.other {
+  background: rgba(107, 91, 71, 0.8);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+/* Rating Section */
+.wine-rating {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.wine-rating-value {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  letter-spacing: 0.05em;
+}
+
+.wine-rating-stars {
+  display: flex;
+  gap: 2px;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  position: fixed;
+  top: calc(var(--safe-top) + 80px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  z-index: 30;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.empty-state p {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 88px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  letter-spacing: 0.02em;
+}
+
+.back-link:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+/* ============================================
+   ERROR STATE
+   ============================================ */
+
+.error-state {
+  position: fixed;
+  top: calc(var(--safe-top) + 80px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  z-index: 30;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.error-state p {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #FF6B6B;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* Small phones */
+@media (max-width: 375px) {
+  .sort-dropdown {
+    min-width: 120px;
+    font-size: 0.85rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .wine-name {
+    font-size: 1.25rem;
+  }
+
+  .wine-overlay {
+    min-height: 120px;
+    padding: var(--spacing-lg) var(--spacing-sm) var(--spacing-sm);
+  }
+
+  .wine-meta-container {
+    gap: var(--spacing-sm);
+  }
+
+  .wine-bottom-info {
+    gap: var(--spacing-sm);
+  }
+
+  .wine-qty-badge {
+    font-size: 0.75rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .empty-state p,
+  .error-state p {
+    font-size: 1rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 320px) {
+  .wine-name {
+    font-size: 1.1rem;
+  }
+
+  .sort-dropdown {
+    min-width: 100px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape mode on phones */
+@media (orientation: landscape) and (max-height: 500px) {
+  .sort-container {
+    top: calc(var(--safe-top) + 60px);
+  }
+
+  .swiper {
+    top: calc(var(--safe-top) + 60px + 50px);
+    height: calc(100vh - var(--safe-top) - 60px - 50px);
+  }
+
+  .wine-overlay {
+    min-height: 80px;
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
+  }
+
+  .wine-name {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .wine-meta-container,
+  .wine-bottom-info {
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Tablets and larger screens */
+@media (min-width: 768px) {
+  .sort-dropdown {
+    min-width: 180px;
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .wine-name {
+    font-size: 1.75rem;
+  }
+
+  .wine-overlay {
+    min-height: 160px;
+    padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-lg);
+  }
+
+  .wine-type-badge {
+    font-size: 0.8rem;
+  }
+
+  .empty-state p,
+  .error-state p {
+    font-size: 1.5rem;
+  }
+}
+
+/* High resolution displays */
+@media (min-width: 1024px) {
+  .wine-overlay {
+    min-height: 180px;
+  }
+
+  .wine-name {
+    font-size: 2rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .sort-dropdown {
+    border-width: 2px;
+  }
+
+  .wine-type-badge,
+  .wine-qty-badge {
+    border-width: 2px;
+  }
+
+  .back-link {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .wine-image img {
+    animation: none;
+  }
+
+  .wine-name,
+  .wine-meta-container,
+  .wine-bottom-info {
+    animation: none;
+  }
+}
+
+/* Dark mode preference (keep dark theme - wine cellars are dark!) */
+@media (prefers-color-scheme: light) {
+  /* Keep dark theme for wine experience */
+}
+
+/* Forced colors mode (Windows High Contrast) */
+@media (forced-colors: active) {
+  .sort-dropdown,
+  .wine-type-badge,
+  .wine-qty-badge,
+  .back-link {
+    border: 2px solid;
+  }
+
+  .wine-overlay {
+    background: Canvas;
+    color: CanvasText;
+  }
+}
