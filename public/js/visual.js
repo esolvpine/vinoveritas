@@ -238,10 +238,11 @@ function buildSlide(wine) {
   // Rating section
   const ratingSection = $('<div class="wine-rating"></div>');
   if (wine.notation && wine.notation > 0) {
+    const rating = Number(wine.notation);
     const ratingValue = $('<div class="wine-rating-value"></div>')
-      .text(wine.notation.toFixed(1));
+      .text(rating.toFixed(1));
     const stars = $('<div class="wine-rating-stars"></div>')
-      .text('★'.repeat(Math.floor(wine.notation)) + (wine.notation % 1 >= 0.5 ? '½' : ''));
+      .text('★'.repeat(Math.floor(rating)) + (rating % 1 >= 0.5 ? '½' : ''));
     ratingSection.append(ratingValue);
     ratingSection.append(stars);
   } else {
