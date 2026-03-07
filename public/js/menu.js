@@ -33,6 +33,7 @@ if (lastPartWithoutParams === "activities") {
     },
     { text: "Cellier", onclick: "window.location.href='cellar';" },
     { text: "Ajouter un vin", onclick: "window.location.href='details';" },
+    { text: "Liste visuelle", onclick: "window.location.href='/visual';" },
   ];
   $(".hamburger-menu").append($menuItems);
 } else if (lastPartWithoutParams === "details") {
@@ -43,6 +44,7 @@ if (lastPartWithoutParams === "activities") {
     },
     { text: "Cellier", onclick: "window.location.href='cellar';" },
     { text: "Ajouter un vin", onclick: "window.location.href='details';" },
+    { text: "Liste visuelle", onclick: "window.location.href='/visual';" },
   ];
   $(".hamburger-menu").append($menuItems);
 } else if (lastPartWithoutParams === "cellar") {
@@ -53,6 +55,7 @@ if (lastPartWithoutParams === "activities") {
         "fetchCurrentAll('');messageCenter.html('Tous les vins enregistrés');filterByName('');",
     },
     { text: "Ajouter un vin", onclick: "window.location.href='details';" },
+    { text: "Liste visuelle", onclick: "window.location.href='/visual';" },
   ];
   $(".hamburger-menu").append($menuItems);
 } else if (
@@ -86,8 +89,20 @@ if (lastPartWithoutParams === "activities") {
         "setCurrentWineList('type','Sparkling wine');messageCenter.html('Les mousseux');filterByName('');",
     },
     { text: "Ajouter un vin", onclick: "window.location.href='details';" },
+    { text: "Liste visuelle", onclick: "window.location.href='/visual';" },
     { text: "Activités", onclick: "window.location.href='activities';" },
     { text: "Cellier", onclick: "window.location.href='cellar';" },
+  ];
+  $(".hamburger-menu").append($menuItems);
+} else if (lastPartWithoutParams === "visual") {
+  menuItems = [
+    {
+      text: "Acceuil",
+      onclick: "fetchCurrentAll('');messageCenter.html('Tous les vins enregistrés');filterByName('');",
+    },
+    { text: "Cellier", onclick: "window.location.href='/cellar';" },
+    { text: "Ajouter un vin", onclick: "window.location.href='/details';" },
+    { text: "Activités", onclick: "window.location.href='/activities';" },
   ];
   $(".hamburger-menu").append($menuItems);
 }
