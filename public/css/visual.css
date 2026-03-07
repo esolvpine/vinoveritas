@@ -325,25 +325,25 @@ body {
   animation: slideUp 0.4s ease-out 0.2s backwards;
 }
 
-.wine-type-badge.red {
+.wine-type-badge.wine-type-red {
   background: var(--color-red-wine);
   color: var(--color-text-primary);
   border: 1px solid rgba(201, 169, 97, 0.3);
 }
 
-.wine-type-badge.white {
+.wine-type-badge.wine-type-white {
   background: var(--color-white-wine);
   color: var(--color-bg-dark);
   border: 1px solid rgba(212, 165, 116, 0.5);
 }
 
-.wine-type-badge.sparkling {
+.wine-type-badge.wine-type-sparkling {
   background: var(--color-sparkling-wine);
   color: var(--color-bg-dark);
   border: 1px solid rgba(232, 197, 116, 0.5);
 }
 
-.wine-type-badge.other {
+.wine-type-badge.wine-type-other {
   background: var(--color-other-wine);
   color: var(--color-text-primary);
   border: 1px solid rgba(201, 169, 97, 0.3);
@@ -375,25 +375,25 @@ body {
   transition: all var(--transition-normal);
 }
 
-.wine-qty-badge.red {
+.wine-qty-badge.wine-type-red {
   background: rgba(139, 44, 51, 0.8);
   color: var(--color-text-primary);
   border: 1px solid rgba(201, 169, 97, 0.3);
 }
 
-.wine-qty-badge.white {
+.wine-qty-badge.wine-type-white {
   background: rgba(212, 165, 116, 0.8);
   color: var(--color-bg-dark);
   border: 1px solid rgba(232, 197, 116, 0.3);
 }
 
-.wine-qty-badge.sparkling {
+.wine-qty-badge.wine-type-sparkling {
   background: rgba(232, 197, 116, 0.8);
   color: var(--color-bg-dark);
   border: 1px solid rgba(212, 165, 116, 0.3);
 }
 
-.wine-qty-badge.other {
+.wine-qty-badge.wine-type-other {
   background: rgba(107, 91, 71, 0.8);
   color: var(--color-text-primary);
   border: 1px solid rgba(201, 169, 97, 0.3);
