@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Liste visuelle - Vino Veritas</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/visual.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="menu-container">
+      <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
+      <div class="header-title">Vino Veritas</div>
+    </div>
+
+    <!-- Sort Dropdown -->
+    <div class="sort-container">
+      <select id="sortSelector" class="sort-dropdown">
+        <option value="type">Type</option>
+        <option value="name">Nom</option>
+        <option value="rating">Notation</option>
+        <option value="quantity">Quantité</option>
+      </select>
+    </div>
+
+    <!-- Swiper Container -->
+    <div class="swiper" id="wineSwiper">
+      <div class="swiper-wrapper" id="swiperWrapper">
+        <!-- Slides will be dynamically inserted here -->
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <p>Aucun vin en inventaire</p>
+      <a href="/" class="back-link">Retour à l'accueil</a>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="error-state" style="display: none;">
+      <p>Erreur de chargement des vins</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/wineAPI.js"></script>
+    <script src="/js/menu.js"></script>
+    <script src="/js/tools.js"></script>
+    <script src="/js/visual.js"></script>
+  </body>
+</html>
