@@ -1,7 +1,12 @@
 toggleMenu = () => {
   var menuList = document.getElementById("menu-items");
-  menuList.classList.toggle("active");
-  document.getElementById("main").classList.toggle("active-menu");
+  if (menuList) {
+    menuList.classList.toggle("active");
+  }
+  var mainElement = document.getElementById("main");
+  if (mainElement) {
+    mainElement.classList.toggle("active-menu");
+  }
 };
 
 // Create the main menu container

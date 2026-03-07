@@ -6,7 +6,9 @@
 // Global variables
 let swiper = null;
 let inventoryWines = [];
-let currentSort = 'type';
+let allInventoryWines = [];
+let currentSort = 'name';
+let currentTypeFilter = 'red wine';
 
 /**
  * jQuery ready - Initialize page with wine data and event handlers
@@ -14,18 +16,40 @@ let currentSort = 'type';
 $(document).ready(function () {
   // Parse sort parameter from URL if present
   const urlSort = getUrlParameter('sort');
-  if (urlSort && ['type', 'name', 'rating', 'quantity'].includes(urlSort)) {
+  if (urlSort && ['name', 'rating', 'quantity'].includes(urlSort)) {
     currentSort = urlSort;
-    $('#sortSelector').val(urlSort);
   }
+
+  // Parse type filter from URL if present
+  const urlType = getUrlParameter('type');
+  if (urlType) {
+    currentTypeFilter = urlType;
+    $('#typeFilter').val(urlType);
+  }
+
+  // Set active sort button
+  $(`.sort-btn[data-sort="${currentSort}"]`).addClass('active');
 
   // Load and display wines on page load
   loadAndDisplayWines();
 
-  // Handle sort dropdown changes
-  $('#sortSelector').on('change', function () {
-    currentSort = $(this).val();
+  // Handle sort button clicks
+  $('.sort-btn').on('click', function () {
+    const sortValue = $(this).data('sort');
+    currentSort = sortValue;
+
+    // Update active state
+    $('.sort-btn').removeClass('active');
+    $(this).addClass('active');
+
     updateURLParameter('sort', currentSort);
+    loadAndDisplayWines();
+  });
+
+  // Handle type filter changes
+  $('#typeFilter').on('change', function () {
+    currentTypeFilter = $(this).val();
+    updateURLParameter('type', currentTypeFilter);
     loadAndDisplayWines();
   });
 });
@@ -33,7 +57,7 @@ $(document).ready(function () {
 /**
  * loadAndDisplayWines - Async function to fetch, filter, sort and build carousel
  * Fetches all wines from API, filters to only inventory (qty > 0),
- * sorts according to currentSort, and builds the Swiper carousel
+ * filters by type, sorts according to currentSort, and builds the Swiper carousel
  */
 async function loadAndDisplayWines() {
   try {
@@ -41,13 +65,24 @@ async function loadAndDisplayWines() {
     await loadWines();
 
     // Filter wines to only show inventory items (qty > 0)
-    inventoryWines = wines.filter(wine => wine.qty > 0);
+    allInventoryWines = wines.filter(wine => wine.qty > 0);
+
+    // Filter by wine type
+    if (currentTypeFilter === 'all') {
+      inventoryWines = allInventoryWines;
+    } else {
+      inventoryWines = allInventoryWines.filter(wine => {
+        const normalizedType = normalizeWineType(wine.type);
+        return normalizedType === currentTypeFilter;
+      });
+    }
 
     // Handle empty state
     if (inventoryWines.length === 0) {
       $('#swiperWrapper').empty();
       $('#wineSwiper').hide();
-      $('#sortSelector').prop('disabled', true);
+      $('.sort-btn').prop('disabled', true);
+      $('#typeFilter').prop('disabled', false);
       $('#emptyState').show();
       $('#errorState').hide();
       if (swiper) swiper.destroy();
@@ -58,7 +93,8 @@ async function loadAndDisplayWines() {
     $('#wineSwiper').show();
     $('#emptyState').hide();
     $('#errorState').hide();
-    $('#sortSelector').prop('disabled', false);
+    $('.sort-btn').prop('disabled', false);
+    $('#typeFilter').prop('disabled', false);
 
     // Sort wines according to currentSort
     sortWines();
@@ -71,34 +107,20 @@ async function loadAndDisplayWines() {
     $('#wineSwiper').hide();
     $('#emptyState').hide();
     $('#errorState').show();
-    $('#sortSelector').prop('disabled', true);
+    $('.sort-btn').prop('disabled', true);
+    $('#typeFilter').prop('disabled', true);
     if (swiper) swiper.destroy();
   }
 }
 
 /**
- * sortWines - Handles 4 sort modes
- * - type: Sort by wine type (Red → White → Sparkling → Other)
+ * sortWines - Handles 3 sort modes
  * - name: Sort alphabetically by name
  * - rating: Sort by rating highest first
  * - quantity: Sort by quantity most first
  */
 function sortWines() {
-  const typeOrder = { 'red wine': 0, 'white wine': 1, 'mousseux': 2, 'rosé wine': 3 };
-
   switch (currentSort) {
-    case 'type':
-      // Sort by type (Rouge→Blanc→Mousseux→Other), then by name
-      inventoryWines.sort((a, b) => {
-        const typeA = normalizeWineType(a.type);
-        const typeB = normalizeWineType(b.type);
-        const orderA = typeOrder[typeA] !== undefined ? typeOrder[typeA] : 4;
-        const orderB = typeOrder[typeB] !== undefined ? typeOrder[typeB] : 4;
-        if (orderA !== orderB) return orderA - orderB;
-        return a.name.localeCompare(b.name);
-      });
-      break;
-
     case 'name':
       // Sort alphabetically by name
       inventoryWines.sort((a, b) => a.name.localeCompare(b.name));
@@ -119,8 +141,8 @@ function sortWines() {
       break;
 
     default:
-      // Default to type sort
-      sortWines();
+      // Default to name sort
+      inventoryWines.sort((a, b) => a.name.localeCompare(b.name));
   }
 }
 

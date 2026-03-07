@@ -31,13 +31,19 @@
       <div class="header-title">Vino Veritas</div>
     </div>
 
-    <!-- Sort Dropdown -->
+    <!-- Sort Controls -->
     <div class="sort-container">
-      <select id="sortSelector" class="sort-dropdown">
-        <option value="type">Type</option>
-        <option value="name">Nom</option>
-        <option value="rating">Notation</option>
-        <option value="quantity">Quantité</option>
+      <div class="sort-buttons">
+        <button class="sort-btn" data-sort="name">Nom</button>
+        <button class="sort-btn" data-sort="rating">Notation</button>
+        <button class="sort-btn" data-sort="quantity">Quantité</button>
+      </div>
+      <select id="typeFilter" class="type-dropdown">
+        <option value="all">Tous les types</option>
+        <option value="red wine" selected>Rouge</option>
+        <option value="white wine">Blanc</option>
+        <option value="rosé wine">Rosé</option>
+        <option value="mousseux">Mousseux</option>
       </select>
     </div>
 
