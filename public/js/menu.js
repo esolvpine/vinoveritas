@@ -40,7 +40,6 @@ if (lastPartWithoutParams === "activities") {
     { text: "Ajouter un vin", onclick: "window.location.href='details';" },
     { text: "Liste visuelle", onclick: "window.location.href='/visual';" },
   ];
-  $(".hamburger-menu").append($menuItems);
 } else if (lastPartWithoutParams === "details") {
   menuItems = [
     {
@@ -51,7 +50,6 @@ if (lastPartWithoutParams === "activities") {
     { text: "Ajouter un vin", onclick: "window.location.href='details';" },
     { text: "Liste visuelle", onclick: "window.location.href='/visual';" },
   ];
-  $(".hamburger-menu").append($menuItems);
 } else if (lastPartWithoutParams === "cellar") {
   menuItems = [
     {
@@ -62,7 +60,6 @@ if (lastPartWithoutParams === "activities") {
     { text: "Ajouter un vin", onclick: "window.location.href='details';" },
     { text: "Liste visuelle", onclick: "window.location.href='/visual';" },
   ];
-  $(".hamburger-menu").append($menuItems);
 } else if (
   lastPartWithoutParams === "" ||
   lastPartWithoutParams === "index"
@@ -98,7 +95,6 @@ if (lastPartWithoutParams === "activities") {
     { text: "Activités", onclick: "window.location.href='activities';" },
     { text: "Cellier", onclick: "window.location.href='cellar';" },
   ];
-  $(".hamburger-menu").append($menuItems);
 } else if (lastPartWithoutParams === "visual") {
   menuItems = [
     { text: "Acceuil", onclick: "window.location.href='/';" },
@@ -106,7 +102,6 @@ if (lastPartWithoutParams === "activities") {
     { text: "Ajouter un vin", onclick: "window.location.href='/details';" },
     { text: "Activités", onclick: "window.location.href='/activities';" },
   ];
-  $(".hamburger-menu").append($menuItems);
 }
 
 // Append the main menu container to the desired location in the DOM
@@ -114,9 +109,24 @@ menuItems.forEach(function (item) {
   var $menuDiv = $("<div>", {
     class: "inner-menu-div",
     text: item.text,
-    click: function () {
-      eval(item.onclick);
+    click: function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Close the menu first
+      var menuList = document.getElementById("menu-items");
+      if (menuList) {
+        menuList.classList.remove("active");
+      }
+
+      // Execute the navigation after a short delay to allow menu to close
+      setTimeout(function() {
+        eval(item.onclick);
+      }, 100);
     },
   });
   $menuItems.append($menuDiv);
 });
+
+// Append menu to body instead of inside hamburger button
+$("body").append($menuItems);
